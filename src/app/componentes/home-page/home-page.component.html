@@ -2,36 +2,34 @@
   <div class="row">
 
   </div>
-  <form [formGroup]="post" (ngSubmit)="createPost()" novalidate="novalidate">
-    <div class="input-group row">
-      <textarea [(ngModel)]="post.contenido" name="contenido" class="form-control" aria-label="With textarea"
-        placeholder="Escribe tu mensaje" formControlName="contenido"></textarea>
+  <form (ngSubmit)="createPost(postText)" #text="ngForm" novalidate="novalidate">
+    <div>
+      <textarea name="contenido" [ngModel]="text.contenido" required class="form-control" aria-label="With textarea"
+        placeholder="Escribe tu mensaje"></textarea>
     </div>
-    <div *ngIf="!post.controls['contenido'].valid" class="form-control-feedback">
+    <!-- <div *ngIf="!postText.controls['contenido'].valid" class="form-control-feedback">
       No puede enviar un post vacío!
-    </div>
-    <div class="">
-    </div>
+    </div> -->
+
     <div class="input-group-prepend">
-      <button [disabled]="!this.post.valid" class="btn btn-outline-primary" type="submit" id="button-addon1"
-        (postAgregado)="addPost($event)">
+      <button class="btn btn-outline-primary" type="submit" id="button-addon1">
         Enviar
       </button>
     </div>
   </form>
 </section>
 <section>
-  <div class="card text-center">
+  <div class="card">
     <div class="card-header">
-      Featured
+      Nombre Usuario
     </div>
     <div class="card-body">
-      {{ this.post.value | json }}
+      {{ this.text.contenido | json }}
       <div class="card-footer text-muted">
-        <i class="fas fa-heart" formControlName="likes"></i>
+        <i class="fas fa-heart"></i>
       </div>
     </div>
   </div>
 </section>
 
-{{post.valid}}
+{{this.text.valid}}

@@ -1,7 +1,11 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 
-import { post } from 'selenium-webdriver/http';
+import { Text } from '../interfaces/text.interface';
+import { TextService } from '../../servicios/text.service';
+
+
+// import { postText } from 'selenium-webdriver/http';
 import { EventEmitter } from 'events';
 
 
@@ -13,36 +17,24 @@ import { EventEmitter } from 'events';
 })
 
 export class HomePageComponent implements OnInit {
-    post: FormGroup;
-
-    // @Input() post: any = {}
-    // @Output() postAgregado: EventEmitter;
-
-    constructor() {
-        this.post = new FormGroup({
-            'usuario': new FormControl(),
-            'contenido': new FormControl('', [Validators.required, Validators.maxLength(100)]),
-            // 'likes': new FormControl(0),
-
-
-        });
-        this.post.setValue;
-        // this.postAgregado = new EventEmitter();
+    text: Object = {
+        contenido: ""
     }
+
+    constructor(public _textService: TextService) { }
 
 
     ngOnInit() {
     }
-    createPost() {
-        console.log(this.post.value);
+    createPost(text: NgForm) {
+        // console.log(this.text.value);
+
+        this._textService.nuevoPost(this.text)
+            .subscribe(data => {
+
+            })
+
     }
-    addPost() {
-        /* this.postAgregado.emit(this.post); */
-        // let postNew = {
-        //     content: this.memeForm.value.description,
-        //     likes: 0,
-        //     key$: string
-        // }
-    }
+
 
 }
