@@ -10,6 +10,12 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { LoginPageComponent } from './componentes/login-page/login-page.component';
 import { ProfileComponent } from './componentes/profile/profile.component';
 import { MapaComponent } from './componentes/mapa/mapa.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { AuthService } from './servicios/auth.service';
+import { RegisterPageComponent } from './componentes/register-page/register-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -18,16 +24,20 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
     NavbarComponent,
     LoginPageComponent,
     ProfileComponent,
-    MapaComponent
+    MapaComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

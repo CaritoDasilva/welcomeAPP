@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">WelcomeAPP</a>
+  <a class="navbar-brand text-light">WelcomeAPP</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,22 +7,25 @@
 
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf=isLogin>
         <a class="nav-link" href="#" routerLink="/home">Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf=isLogin>
         <a class="nav-link" href="#" routerLink="/profile">Perfil</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf=isLogin>
         <a class="nav-link" href="#" routerLink="/mapa">Mapa</a>
       </li>
     </ul>
     <ul class="navbar-nav mx-auto">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf=!isLogin>
         <a class="nav-link" href="#" routerLink="/login">Login</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Salir</a>
+      <li class="nav-item" *ngIf=!isLogin>
+        <a class="nav-link" href="#" routerLink="/register">Registrarse</a>
+      </li>
+      <li class="nav-item" *ngIf=isLogin>
+        <a class="nav-link" href="#" (click)="onClickLogout()">Salir</a>
       </li>
     </ul>
   </div>
